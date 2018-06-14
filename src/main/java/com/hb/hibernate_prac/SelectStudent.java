@@ -10,7 +10,7 @@ import org.hibernate.service.ServiceRegistry;
 public class SelectStudent {
 	public static void main(String args[]) {
 		final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
-		final  Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(Student.class).getMetadataBuilder().applyImplicitNamingStrategy(new  org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl()).build();
+		final  Metadata metadata = new MetadataSources(serviceRegistry).addAnnotatedClass(Student.class).addAnnotatedClass(StudDetails.class).getMetadataBuilder().applyImplicitNamingStrategy(new  org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl()).build();
 		final SessionFactory sessionFactory = metadata.buildSessionFactory();
 		final Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -18,17 +18,16 @@ public class SelectStudent {
 		final Student student1 = session.get(Student.class,2);
 		System.out.println(student);
 		System.out.println(student1);
+		final Object[] sd =  (Object[])session.createQuery("select sd.studentName,sd.phone from student_details sd where id = 1").getSingleResult();
+		System.out.println(sd[0]);
+		System.out.println(sd[1]);
+		//		System.out.println(student.getPhones().get(0));
+		//		System.out.println(student.getPhones().get(1));
+		//		System.out.println(student.getPhones().get(0));
+		//		session.save(student);
 		session.getTransaction().commit();
 		// System.out.println(student.getLaptops().get(0));
+		session.close();
 
-		System.out.println("printing meet's laptop");
-		for(final Laptop laptop : student.getLaptops()) {
-			System.out.println(laptop);
-		}
-
-		System.out.println("printing manthan's laptop");
-		for(final Laptop laptop : student1.getLaptops()) {
-			System.out.println(laptop);
-		}
 	}
 }

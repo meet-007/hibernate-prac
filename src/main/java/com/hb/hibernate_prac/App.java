@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
 /**
  * arg0 Hello world!g
@@ -13,8 +12,6 @@ import org.hibernate.cfg.Configuration;
  */
 public class App {
 	public static void main(String[] args) {
-		new Configuration();
-		// ServiceRegistry serviceRegistry = new serviceregistryb
 		final StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
 
 		final SessionFactory sessionFactory = new MetadataSources(serviceRegistry).addAnnotatedClass(Student.class)
@@ -26,10 +23,14 @@ public class App {
 		final Student manthan = new Student();
 		manthan.setName("manthan");
 		manthan.setRoll_no("134");
+		manthan.getPhones().add(new Phone("home", "9986565632"));
+		manthan.getPhones().add(new Phone("work", "9986565634"));
 
 		final Student meet = new Student();
 		meet.setName("meet");
 		meet.setRoll_no("5");
+		meet.getPhones().add(new Phone("home", "9986565623"));
+		meet.getPhones().add(new Phone("work", "8141740921"));
 
 		final Laptop laptop = new Laptop();
 		laptop.setCompany("dell");

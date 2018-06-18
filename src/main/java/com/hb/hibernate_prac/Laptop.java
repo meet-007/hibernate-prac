@@ -1,25 +1,31 @@
 package com.hb.hibernate_prac;
 
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name="laptop")
 public class Laptop {
 
 	@Id
-	@GeneratedValue(generator="increment")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String company;
-
-	@ManyToMany
-	private List<Student> students;
+	//
+	//	@ManyToMany
+	//	private List<Student> students;
+	@ManyToOne(cascade=CascadeType.PERSIST)
+	@NotFound(action = NotFoundAction.EXCEPTION)
+	private Student student;
 
 	public String getCompany() {
 		return company;
@@ -30,8 +36,8 @@ public class Laptop {
 	public String getName() {
 		return name;
 	}
-	public List<Student> getStudent() {
-		return students;
+	public Student getStudent() {
+		return student;
 	}
 	public void setCompany(String company) {
 		this.company = company;
@@ -42,8 +48,8 @@ public class Laptop {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setStudent(List<Student> students) {
-		this.students = students;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 	@Override
 	public String toString() {

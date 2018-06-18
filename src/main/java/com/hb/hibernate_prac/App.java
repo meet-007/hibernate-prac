@@ -1,7 +1,6 @@
 package com.hb.hibernate_prac;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,41 +59,47 @@ public class App {
 		laptop.setCompany("dell");
 		laptop.setName("dell inspiron");
 		final ArrayList<Student> laptapStudents = new ArrayList<Student>();
-		laptapStudents.add(meet);
-		laptapStudents.add(manthan);
-		laptop.setStudent(laptapStudents);
+		// laptapStudents.add(meet);
+		// laptapStudents.add(manthan);
+		// laptop.setStudent(laptapStudents);
+		laptop.setStudent(meet);
 
 		final Laptop laptop1 = new Laptop();
 		laptop1.setCompany("hp");
 		laptop1.setName("spector");
-		final ArrayList<Student> laptap1Students = new ArrayList<Student>();
-		laptap1Students.add(meet);
-		laptop1.setStudent(laptap1Students);
-
+		// final ArrayList<Student> laptap1Students = new ArrayList<Student>();
+		// laptap1Students.add(meet);
+		// laptop1.setStudent(laptap1Students);
+		laptop1.setStudent(meet);
 		final Laptop laptop2 = new Laptop();
 		laptop2.setCompany("lenovo");
 		laptop2.setName("ideapad");
-		final ArrayList<Student> laptap2Students = new ArrayList<Student>();
-		laptap2Students.add(manthan);
-		laptop2.setStudent(laptap2Students);
+		laptop2.setStudent(manthan);
 
-		final List<Laptop> meetlaptops = new ArrayList<Laptop>();
-		meetlaptops.add(laptop2);
-		meet.setLaptops(meetlaptops);
+		final Laptop laptop3 = new Laptop();
+		laptop3.setCompany("apple");
+		laptop3.setName("macbook");
+		// final ArrayList<Student> laptap2Students = new ArrayList<Student>();
+		// laptap2Students.add(manthan);
+		// laptop2.setStudent(laptap2Students);
+		// laptop.setStudent(meet);
+		// final List<Laptop> meetlaptops = new ArrayList<Laptop>();
+		// meetlaptops.add(laptop2);
+		// meet.setLaptops(meetlaptops);
+		//
+		// final List<Laptop> laptops = new ArrayList<Laptop>();
+		// laptops.add(laptop);
+		// laptops.add(laptop1);
+		// manthan.setLaptops(laptops);
 
-		final List<Laptop> laptops = new ArrayList<Laptop>();
-		laptops.add(laptop);
-		laptops.add(laptop1);
-		manthan.setLaptops(laptops);
-
-		session.save(laptop);
-		session.save(laptop1);
-		session.save(laptop2);
-
+		session.persist(laptop);
+		session.persist(laptop1);
+		session.persist(laptop2);
+		session.persist(laptop3);
 		// saves students
 
-		session.save(meet);
-		session.save(manthan);
+		// session.save(meet);
+		// session.save(manthan);
 
 		// save laptops
 
